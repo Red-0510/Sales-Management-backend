@@ -25,7 +25,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsConfig = {
+    origin: ["http://localhost:3000"],
+    credentials: true,
+};
+  // for allowing cross origin requests
+app.use(cors(corsConfig));
+// app.use(cors());
 
 // serve the static files
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));

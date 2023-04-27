@@ -33,29 +33,23 @@ const corsConfig = {
   // for allowing cross origin requests
 app.use(cors(corsConfig));
 
-// app.options("*", cors(corsConfig));
+app.options("*", cors(corsConfig));
 
-// // app.use(login);
-// app.use(function (req, res, next) {
-//   const corsWhitelist = [
-//     "https://y4sh-patel.github.io/tnp",
-//     "http://localhost:3000",
-//   ];
-//   if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
-//     res.header("Access-Control-Allow-Origin", req.headers.origin);
-//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, HEAD, OPTIONS");
-//     res.header("Access-Control-Allow-Headers", "Content-Type");
-//     res.header("Access-Control-Allow-Credentials", true);
-//   }
-//   //   res.header("Access-Control-Allow-Origin", "https://y4sh-patel.github.io/tnp");
-//   //   // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   //   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//   //   res.header("Access-Control-Allow-Headers", "Content-Type");
-//   //   res.header("Access-Control-Allow-Credentials", true);
-//   // }
-//   next();
-// });
-// app.use(cors());
+// app.use(login);
+app.use(function (req, res, next) {
+  const corsWhitelist = [
+    "https://sales-management-frontend.vercel.app/",
+    "http://localhost:3000",
+  ];
+  if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Credentials", true);
+  }
+  next();
+});
+app.use(cors());
 
 // serve the static files
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));

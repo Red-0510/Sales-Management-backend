@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 const corsConfig = {
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000","https://sales-management-backend.onrender.com"],
     credentials: true,
 };
   // for allowing cross origin requests

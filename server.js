@@ -18,6 +18,7 @@ import errorHandler from "./middlewares/error.js";
 dotenv.config();
 
 const __dirname = path.resolve();
+const originURLs = process.env.URLS.split(",");
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.use(bodyParser.json());
 // setting cors and fixing the Access-Control-Allow-Origin error
 app.use(
   cors({
-    origin:["http://localhost:3000"],
+    origin:originURLs,
     credentials:true,
   })
 );

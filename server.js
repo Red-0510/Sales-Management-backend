@@ -26,30 +26,15 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-const corsConfig = {
-    origin: true,
-    credentials: true,
-};
-  // for allowing cross origin requests
-app.use(cors(corsConfig));
 
-app.options("*", cors(corsConfig));
-
-// app.use(login);
-app.use(function (req, res, next) {
-  const corsWhitelist = [
-    "https://sales-management-frontend.vercel.app/",
-    "http://localhost:3000",
-  ];
-  if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
-    res.header("Access-Control-Allow-Origin", req.headers.origin);
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.header("Access-Control-Allow-Credentials", true);
-  }
+// setting cors and fixing the Access-Control-Allow-Origin error
+app.use(function (req, res, next){
+  res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 });
-app.use(cors());
 
 // serve the static files
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));

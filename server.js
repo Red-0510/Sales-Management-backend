@@ -19,7 +19,7 @@ dotenv.config();
 
 const __dirname = path.resolve();
 const originURLs = process.env.URLS.split(",");
-
+console.log(originURLs);
 const app = express();
 
 app.use(express.json());

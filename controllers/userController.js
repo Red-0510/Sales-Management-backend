@@ -47,6 +47,7 @@ export const registerUser = async (req,res,next)=>{
         res.cookie("token",token,{
             httpOnly: false,
             expires : new Date(Date.now() + 1000 * 86400),
+            sameSite:None,
             secure:false,
         });
 
@@ -92,6 +93,7 @@ export const loginUser = async (req,res,next)=>{
             res.cookie("token",token,{
                 httpOnly: false,
                 expires : new Date(Date.now() + 1000 * 86400),
+                sameSite:None,
                 secure:false,
             });
             const {_id,name,email,photo,bio,phone} = user;

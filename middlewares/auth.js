@@ -6,7 +6,6 @@ export const userAuth = async (req,res,next)=>{
     try{
         // get the token from cookies
         const token = await req.cookies.token;
-        console.log(`auth token: ${token}`);
         if(!token){
             res.status(401);
             throw new Error("Not authorized, Please Login");

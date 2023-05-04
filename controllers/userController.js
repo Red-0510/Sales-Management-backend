@@ -145,7 +145,8 @@ export const getUser = async(req,res,next)=>{
 
 //get login status of user
 export const loginStatus = async (req,res) =>{
-    const token = req.cookies.token;
+    const token = await req.cookies.token;
+    console.log(`token: ${token}`);
     if(!token){
         return res.json(false);
     }

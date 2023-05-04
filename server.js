@@ -18,6 +18,7 @@ import errorHandler from "./middlewares/error.js";
 dotenv.config();
 
 const __dirname = path.resolve();
+const originURLs = process.env.URLS.split(",");
 
 const app = express();
 
@@ -28,19 +29,26 @@ app.use(bodyParser.json());
 
 
 // setting cors and fixing the Access-Control-Allow-Origin error
-app.use(function (req, res, next){
+app.use(
+  cors({
+    origin:originURLs,
+    credentials:true,
+  })
+);
+// app.use(function (req, res, next){
 
-  const allowedOrigins = process.env.URLS.split(',');
+//   const allowedOrigins = process.env.URLS.split(',');
   
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Credentials", true);
-  next();
-});
+//   const origin = req.headers.origin;
+//   console.log(origin);
+//   if (allowedOrigins.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', origin);
+//   }
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   next();
+// });
 
 // serve the static files
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));

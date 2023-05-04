@@ -113,7 +113,6 @@ export const loginUser = async (req,res,next)=>{
 export const logoutUser = async(req,res,next)=>{
     try{
         res.cookie("token",null,{
-            path:"/",
             httpOnly: false,
             expires : new Date(0),
         });
@@ -144,7 +143,7 @@ export const getUser = async(req,res,next)=>{
 
 //get login status of user
 export const loginStatus = async (req,res) =>{
-    const token = await req.cookies.token   ;
+    const token = await req.headers.token;
     console.log(`token: ${token}`);
     if(!token){
         return res.json(false);

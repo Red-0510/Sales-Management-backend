@@ -47,8 +47,8 @@ export const registerUser = async (req,res,next)=>{
         res.cookie("token",token,{
             httpOnly: false,
             expires : new Date(Date.now() + 1000 * 86400),
-            sameSite:None,
-            secure:false,
+            sameSite:'none',
+            secure:true,
         });
 
         if(user){
@@ -93,8 +93,8 @@ export const loginUser = async (req,res,next)=>{
             res.cookie("token",token,{
                 httpOnly: false,
                 expires : new Date(Date.now() + 1000 * 86400),
-                sameSite:None,
-                secure:false,
+                sameSite:'none',
+                secure:true,
             });
             const {_id,name,email,photo,bio,phone} = user;
             res.status(200).json({
@@ -117,6 +117,8 @@ export const logoutUser = async(req,res,next)=>{
         res.cookie("token",null,{
             httpOnly: false,
             expires : new Date(0),
+            sameSite:'none',
+            secure:true,
         });
         res.status(200).json({message:"Successfully Logged out"});
     }

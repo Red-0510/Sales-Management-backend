@@ -45,10 +45,9 @@ export const registerUser = async (req,res,next)=>{
 
         // send the token as cookie
         res.cookie("token",token,{
-            path:"/",
             httpOnly: false,
             expires : new Date(Date.now() + 1000 * 86400),
-            // secure:true,
+            secure:false,
         });
 
         if(user){
@@ -91,9 +90,9 @@ export const loginUser = async (req,res,next)=>{
 
             // send the token as cookie
             res.cookie("token",token,{
-                path:"/",
                 httpOnly: false,
                 expires : new Date(Date.now() + 1000 * 86400),
+                secure:false,
             });
             const {_id,name,email,photo,bio,phone} = user;
             res.status(200).json({
@@ -145,7 +144,7 @@ export const getUser = async(req,res,next)=>{
 
 //get login status of user
 export const loginStatus = async (req,res) =>{
-    const token = await req.cookies.token;
+    const token = await req.cookies.token   ;
     console.log(`token: ${token}`);
     if(!token){
         return res.json(false);
